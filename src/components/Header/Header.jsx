@@ -52,14 +52,6 @@ export default function Header() {
             </span>
           </div>
           <div className="flex flex-row justify-center content-center items-center">
-            <span className="mr-6">
-              <Link
-                to="/notifications"
-                className="capitalize no-underline text-gray-600 text-xl"
-              >
-                <i className="fa fa-bell"></i>
-              </Link>
-            </span>
             <span>
               <div className=" capitalize no-underline w-12 h-12 mt-2 relative z-10">
                 {openDropMenu && (
