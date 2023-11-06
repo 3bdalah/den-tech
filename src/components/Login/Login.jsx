@@ -53,7 +53,6 @@ export default function Login() {
     },
     validationSchema,
     onSubmit: (values) => {
-      console.log(values);
       handleLogin(values);
       console.log("loading", isLoading);
     },
