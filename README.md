@@ -13,7 +13,7 @@ This template provides a minimal setup to get React working in Vite with HMR and
 +---components
 | +---Footer
 | | Footer.jsx
-| | Footer.module.css  
+| | Footer.module.css
 | |
 | +---Header
 | | Header.jsx
@@ -43,7 +43,7 @@ This template provides a minimal setup to get React working in Vite with HMR and
 | | Profile.jsx
 | | Profile.module.css
 | |
-| \---ProtectedRoutes
+| ---ProtectedRoutes
 | ProtectedRoutes.jsx
 | ProtectedRoutes.module.css
 |
@@ -53,4 +53,4 @@ This template provides a minimal setup to get React working in Vite with HMR and
 | JobsSlice.jsx
 | Store.jsx
 |
-\---Utils
+---Utils
