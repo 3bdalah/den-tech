@@ -6,7 +6,7 @@ const JobCard = ({ job }) => {
 
   return (
     <div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/4 p-4">
-      <div className="bg-white rounded-xl shadow-md overflow-hidden">
+      <div className="bg-slate-50 rounded-xl shadow-sm border border-gray-200 overflow-hidden">
         <div className="md:flex">
           <div className="p-4 w-full">
             <div className="uppercase tracking-wide text-sm text-indigo-500 font-semibold">

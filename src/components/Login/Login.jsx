@@ -1,16 +1,14 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
-// import Login from "./Login";
 import axios from "axios";
-// import { JobsContext } from "../../Context/JobsContext";
+import { JobsContext } from "./../../Context/JobsContext";
 
 export default function Login() {
+  const { setToken, setJobs } = useContext(JobsContext);
   let navigate = useNavigate();
   const [isLoading, setLoading] = useState(false);
-  // const [token, setToken] = useState("");
-  // const { setJobs } = useContext(JobsContext);
   const handleLogin = async (values) => {
     console.log("values", values);
     setLoading(true);
@@ -20,19 +18,13 @@ export default function Login() {
 
         values
       );
-      console.log(res);
       if (res.data.message == "logged in successfully") {
         const { token, jobs } = res.data;
-
+        setToken(token);
+        setJobs(jobs);
         localStorage.setItem("jobs", JSON.stringify(jobs));
-        // setJobs(jobs);
         localStorage.setItem("token", token);
-        // notifySuccess("Success!");
-        console.log("success loged in");
-        setTimeout(() => {
-          navigate("/profile");
-        }, 1000);
-        console.log("respons from endpoint login", res);
+        navigate("/");
       } else if (
         res.data.message == "password not correct" ||
         res.data.message == "User not found, You have to register first"
