@@ -2,10 +2,9 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import "./App.css";
 import Layout from "./components/Layout/Layout";
 import Login from "./components/Login/Login";
-import Home from "./components/Home/Home";
 import NotFound from "./components/NotFound/NotFound";
-import Profile from "./components/Profile/Profile";
 import Jobs from "./components/Jobs/Jobs";
+import ProtectedRoutes from "./components/ProtectedRoutes/ProtectedRoutes";
 
 function App() {
   const routes = createBrowserRouter([
@@ -15,11 +14,22 @@ function App() {
       children: [
         {
           index: true,
-          element: <Home />,
+          element: (
+            <ProtectedRoutes>
+              {" "}
+              <Jobs />{" "}
+            </ProtectedRoutes>
+          ),
         },
         { path: "/login", element: <Login /> },
-        { path: "/jobs", element: <Jobs /> },
-        { path: "/profile", element: <Profile /> },
+        {
+          path: "/jobs",
+          element: (
+            <ProtectedRoutes>
+              <Jobs />
+            </ProtectedRoutes>
+          ),
+        },
 
         { path: "*", element: <NotFound /> },
       ],
