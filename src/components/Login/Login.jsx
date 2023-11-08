@@ -1,50 +1,53 @@
 import { useState } from "react";
 import * as Yup from "yup";
 import { useFormik } from "formik";
-// import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 // import Login from "./Login";
+import axios from "axios";
+// import { JobsContext } from "../../Context/JobsContext";
 
 export default function Login() {
-  // let navigate = useNavigate();
+  let navigate = useNavigate();
   const [isLoading, setLoading] = useState(false);
   // const [token, setToken] = useState("");
-
+  // const { setJobs } = useContext(JobsContext);
   const handleLogin = async (values) => {
     console.log("values", values);
     setLoading(true);
-    // try {
-    //   const res = await axios.post(
-    //     "https://trello-backend-tlg1.onrender.com/login",
-    //     values
-    //   );
-    //   console.log(res);
-    //   if (res.data.message == "logged in successfully") {
-    //     const { token } = res.data;
-    //     localStorage.setItem("token", token);
-    //     notifySuccess("Success!");
-    //     setToken(token);
-    //     setTimeout(() => {
-    //       navigate("/profile");
-    //     }, 1000);
-    //     console.log(res);
-    //   } else if (
-    //     res.data.message == "password not correct" ||
-    //     res.data.message == "User not found, You have to register first"
-    //   ) {
-    //     notifyError("Invalid email or password!");
-    //     console.log("faild to login ", res);
-    //   }
-    // } catch (error) {
-    //   console.log("error", error);
-    // }
+    try {
+      const res = await axios.post(
+        "https://dentech.onrender.com/dentist/login",
+
+        values
+      );
+      console.log(res);
+      if (res.data.message == "logged in successfully") {
+        const { token, jobs } = res.data;
+
+        localStorage.setItem("jobs", JSON.stringify(jobs));
+        // setJobs(jobs);
+        localStorage.setItem("token", token);
+        // notifySuccess("Success!");
+        console.log("success loged in");
+        setTimeout(() => {
+          navigate("/profile");
+        }, 1000);
+        console.log("respons from endpoint login", res);
+      } else if (
+        res.data.message == "password not correct" ||
+        res.data.message == "User not found, You have to register first"
+      ) {
+        // notifyError("Invalid email or password!");
+        console.log("faild to login ", res);
+      }
+    } catch (error) {
+      console.log("error", error);
+    }
   };
 
   let validationSchema = Yup.object({
-    email: Yup.string().email("Invalid email").required("Email is required"),
-    password: Yup.string().matches(
-      /^(?=.*[A-Z])(?=.*\d).{6,}$/,
-      "Invalid password. Password must have at least one uppercase letter, one digit, and be at least 6 characters long."
-    ),
+    email: Yup.string().email("invalid email").required("Email is required"),
+    password: Yup.string(),
   });
   let formik = useFormik({
     initialValues: {
@@ -81,7 +84,7 @@ export default function Login() {
                   Email:
                 </label>
                 <input
-                  className="capitalize border border-gray-300 rounded-md bg-gray-100 p-2 "
+                  className=" border border-gray-300 rounded-md bg-gray-100 p-2 "
                   type="email"
                   name="email"
                   placeholder=" your email"
