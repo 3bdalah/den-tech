@@ -19,6 +19,7 @@ export default function Login() {
         values
       );
       if (res.data.message == "logged in successfully") {
+        console.log("data respone", res.data);
         const { token, jobs } = res.data;
         setToken(token);
         setJobs(jobs);
