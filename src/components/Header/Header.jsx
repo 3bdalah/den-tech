@@ -43,6 +43,22 @@ export default function Header() {
                     My-Jobs
                   </Link>
                 </span>
+                <span className="mx-4">
+                  <Link
+                    to="/jobs"
+                    className="capitalize font-mono no-underline text-gray-700"
+                  >
+                    In-Porgress
+                  </Link>
+                </span>
+                <span className="mx-4">
+                  <Link
+                    to="/jobs"
+                    className="capitalize font-mono no-underline text-gray-700"
+                  >
+                    Finished
+                  </Link>
+                </span>
                 <span
                   className="cursor-pointer text-gray-500"
                   onClick={() => handleLogout()}
