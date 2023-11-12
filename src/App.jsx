@@ -5,6 +5,7 @@ import Login from "./components/Login/Login";
 import NotFound from "./components/NotFound/NotFound";
 import Jobs from "./components/Jobs/Jobs";
 import ProtectedRoutes from "./components/ProtectedRoutes/ProtectedRoutes";
+import Profile from "./components/Profile/Profile";
 
 function App() {
   const routes = createBrowserRouter([
@@ -27,6 +28,14 @@ function App() {
           element: (
             <ProtectedRoutes>
               <Jobs />
+            </ProtectedRoutes>
+          ),
+        },
+        {
+          path: "/profile",
+          element: (
+            <ProtectedRoutes>
+              <Profile />
             </ProtectedRoutes>
           ),
         },
