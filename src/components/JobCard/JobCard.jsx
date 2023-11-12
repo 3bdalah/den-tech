@@ -21,7 +21,7 @@ const JobCard = ({ job }) => {
             <p className="mt-2 text-gray-500">{`Deadline: ${new Date(
               job.deadLine
             ).toDateString()}`}</p>
-            <p className="mt-2 text-gray-500">{`Price: $${job.price}`}</p>
+            <p className="mt-2 text-gray-500">{`Price: ${job.price} EGP`}</p>
             <p className="mt-2 text-gray-500">{`Try In: ${
               job.tryIn ? "Yes" : "No"
             }`}</p>
