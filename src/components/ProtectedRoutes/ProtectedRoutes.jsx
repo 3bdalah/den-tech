@@ -1,6 +1,8 @@
 import { Navigate } from "react-router-dom";
 const ProtectedRoutes = (props) => {
-  if (localStorage.getItem("token")) {
+  const token = localStorage.getItem("token");
+
+  if (token) {
     // eslint-disable-next-line react/prop-types
     return props.children;
   } else {
