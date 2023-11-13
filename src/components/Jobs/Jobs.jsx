@@ -3,7 +3,8 @@ import JobCard from "./../JobCard/JobCard";
 import { useContext, useEffect } from "react";
 import axios from "axios";
 export default function Jobs() {
-  const { setJobs, jobs } = useContext(JobsContext);
+  const { setJobs, jobs, setJobsFinished, setJobsInPorgress } =
+    useContext(JobsContext);
   const handleGetAllJobs = async () => {
     try {
       const res = await axios.get(
@@ -32,6 +33,13 @@ export default function Jobs() {
   useEffect(() => {
     handleGetAllJobs();
   }, []);
+
+  useEffect(() => {
+    const finishedJobs = jobs.filter((job) => job.status === "finish");
+    setJobsFinished(finishedJobs);
+    const inProgressJobs = jobs.filter((job) => job.status != "finish");
+    setJobsInPorgress(inProgressJobs);
+  }, [jobs]);
   return (
     <div className="min-h-screen py-6 flex flex-col justify-center sm:py-12 mt-10">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">

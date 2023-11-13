@@ -2,7 +2,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import { JobsContext } from "../../Context/JobsContext";
 export default function Header() {
-  const { token, setToken, setJobs } = useContext(JobsContext);
+  const { token, setToken, setJobs, nameDoctor } = useContext(JobsContext);
+  console.log("doctor name", nameDoctor);
   const [openDropMenu, setOpenDropMenu] = useState(false);
   const navigate = useNavigate();
   const handleToggleMenu = () => {
@@ -40,12 +41,12 @@ export default function Header() {
                     to="/jobs"
                     className="capitalize font-mono no-underline text-gray-700"
                   >
-                    My-Jobs
+                    All-Jobs
                   </Link>
                 </span>
                 <span className="mx-4">
                   <Link
-                    to="/jobs"
+                    to="/in-progress"
                     className="capitalize font-mono no-underline text-gray-700"
                   >
                     In-Porgress
@@ -53,17 +54,11 @@ export default function Header() {
                 </span>
                 <span className="mx-4">
                   <Link
-                    to="/jobs"
+                    to="/finished"
                     className="capitalize font-mono no-underline text-gray-700"
                   >
                     Finished
                   </Link>
-                </span>
-                <span
-                  className="cursor-pointer text-gray-500"
-                  onClick={() => handleLogout()}
-                >
-                  Logout
                 </span>
               </>
             )}
@@ -71,20 +66,95 @@ export default function Header() {
           <div className="flex flex-row justify-center content-center items-center">
             <span>
               <div className=" capitalize no-underline w-12 h-12 mt-2 relative z-10">
-                <div className="flex flex-row items-center justify-center  content-center ">
-                  <span className="text-sm float-left mr-3 text-gray-600 font-mono">
-                    Doctor
-                  </span>
-                  <div
-                    onClick={() => handleToggleMenu()}
-                    className=" cursor-pointer h-10 w-10 p-4 rounded-md  capitalize bg-blue-400 flex items-center justify-center text-white border-1 border-white "
-                  >
-                    {/* {dataProfile && dataProfile.userName
-                    ? dataProfile.userName.substring(0, 1)
-                    : ""} */}
-                    {"Doctor".substring(0, 1)}
-                  </div>
+                <div>
+                  {token && openDropMenu && (
+                    <div className="dropmenu absolute top-12 right-1 w-80  h-fit border-1 border-gray-200 shadow-md rounded-sm font-mono bg-slate-50">
+                      <div className="group-head-menu flex items-center content-center  bg-slate-100 ">
+                        <div className="m-2 h-10 w-10 rounded-md  bg-blue-400 flex items-center justify-center text-white border-1 border-white ">
+                          {/* {dataProfile && dataProfile.userName
+                            ? dataProfile.userName.substring(0, 1)
+                            : ""} */}
+
+                          {nameDoctor?.name?.substring(0, 1)}
+                        </div>
+                        <p className="flex flex-col text-sm  mt-3 text-gray-500">
+                          {/* <span>{dataProfile && dataProfile.userName}</span> */}
+                          <span>{nameDoctor && nameDoctor.name}</span>
+
+                          <span className=" first-letter:capitalize lowercase">
+                            {/* {dataProfile && dataProfile.email} */}
+                            <span>{nameDoctor && nameDoctor.email}</span>
+                          </span>
+                        </p>
+                      </div>
+                      <ul className="list mt-3  ml-0 pl-0 duration-300 transition cursor-pointer font-mono">
+                        <li className="text-gray-500  hover:bg-slate-100">
+                          <Link
+                            to="/profile"
+                            onClick={() => handleToggleMenu()} // Invoke the handleLogout function properly
+                            className="block text-gray-500  transition duration-300 capitalize no-underline font-semibold py-2 px-4 "
+                          >
+                            <i className="fa fa-user"></i> view profile
+                          </Link>
+                        </li>
+                        <li className="text-gray-500 hover:bg-slate-100  ">
+                          <Link
+                            to="/profile"
+                            onClick={() => handleToggleMenu()}
+                            // Invoke the handleLogout function properly
+                            className="block text-gray-500 capitalize no-underline font-semibold py-2 p-4"
+                          >
+                            <i className="fa fa-lock"></i> Change prassword
+                          </Link>
+                        </li>
+                        <li className="text-gray-500 hover:bg-slate-100">
+                          <Link
+                            onClick={handleLogout} // Invoke the handleLogout function properly
+                            className="block text-gray-500 capitalize no-underline font-semibold py-2 px-4"
+                          >
+                            <i className="fa fa-arrow-left mr-2"></i>Log out
+                          </Link>
+                        </li>
+                      </ul>
+                      <hr></hr>
+                      <ul className="list mt-2">
+                        <li className="text-gray-500 mb-2 ml-5">
+                          <i className="fa fa-share-from-square"></i> Invite
+                          Friend
+                        </li>
+                        <li className="text-gray-500 mb-2 ml-5">
+                          <i className="fa fa-comments"></i> Send FeedBack
+                        </li>
+                      </ul>
+                    </div>
+                  )}
                 </div>
+
+                {token ? (
+                  <div className="ccc flex flex-row items-center justify-center content-center ">
+                    <span className="text-sm float-left mr-3 text-gray-600 font-mono">
+                      Doctor
+                    </span>
+                    <div
+                      onClick={() => handleToggleMenu()}
+                      className="cursor-pointer h-10 w-10 p-4 rounded-md capitalize bg-blue-400 flex items-center justify-center text-white border-1 border-white"
+                    >
+                      {nameDoctor?.name?.substring(0, 1)}
+                    </div>
+                  </div>
+                ) : (
+                  <div className="ccc flex flex-row items-center justify-center content-center ">
+                    <span className="text-sm float-left mr-3 text-gray-600 font-mono">
+                      Doctor
+                    </span>
+                    <div
+                      onClick={() => handleToggleMenu()}
+                      className="cursor-pointer h-10 w-10 p-4 rounded-md capitalize bg-blue-400 flex items-center justify-center text-white border-1 border-white"
+                    >
+                      {"Doctor".substring(0, 1)}
+                    </div>
+                  </div>
+                )}
               </div>
             </span>
           </div>
