@@ -8,28 +8,44 @@ export default function TokenContextProvider({ children }) {
   const [jobs, setJobs] = useState([]);
   const [finished, setJobsFinished] = useState([]);
   const [inProgress, setJobsInPorgress] = useState([]);
+  const [nameDoctor, setNameDoctor] = useState("");
+  const [password, setPassword] = useState("");
   useEffect(() => {
     const jobsStorage = localStorage.getItem("jobs");
     if (jobsStorage) {
       setJobs(JSON.parse(jobsStorage));
-      const finishedJobs = jobs.filter((job) => job.status === "finish");
-      setJobsFinished(finishedJobs);
-      const inProgressJobs = jobs.filter(
-        (job) => job.status === "build" || job.status === "cast"
-      );
-      setJobsInPorgress(inProgressJobs);
+      // console.log("check data on jobs after local storage", jobs);
+    }
+    const password = localStorage.getItem("password");
+    if (password) {
+      setPassword(password);
     }
   }, []);
 
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
+    const dataDoctorProfile = localStorage.getItem("doctorData");
     if (storedToken) {
       setToken(storedToken);
+      setNameDoctor(JSON.parse(dataDoctorProfile));
     }
   }, []);
   return (
     <JobsContext.Provider
-      value={{ finished, inProgress, token, setToken, jobs, setJobs }}
+      value={{
+        finished,
+        inProgress,
+        token,
+        setToken,
+        jobs,
+        setJobs,
+        setJobsFinished,
+        setJobsInPorgress,
+        nameDoctor,
+        setNameDoctor,
+        setPassword,
+        password,
+      }}
     >
       {children}
     </JobsContext.Provider>

@@ -6,6 +6,8 @@ import NotFound from "./components/NotFound/NotFound";
 import Jobs from "./components/Jobs/Jobs";
 import ProtectedRoutes from "./components/ProtectedRoutes/ProtectedRoutes";
 import Profile from "./components/Profile/Profile";
+import InProgress from "./components/InProgress/InProgress";
+import Finished from "./components/Finished/Finished";
 
 function App() {
   const routes = createBrowserRouter([
@@ -28,6 +30,22 @@ function App() {
           element: (
             <ProtectedRoutes>
               <Jobs />
+            </ProtectedRoutes>
+          ),
+        },
+        {
+          path: "/in-progress",
+          element: (
+            <ProtectedRoutes>
+              <InProgress />
+            </ProtectedRoutes>
+          ),
+        },
+        {
+          path: "/finished",
+          element: (
+            <ProtectedRoutes>
+              <Finished />
             </ProtectedRoutes>
           ),
         },

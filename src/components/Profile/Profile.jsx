@@ -1,27 +1,142 @@
-// import { useDispatch, useSelector } from "react-redux";
-// import { getDataUser } from "../../Redux/UserSlice";
-// import { useEffect, useState } from "react";
-import settings from "../../Utils/Consts";
-import toast, { Toaster } from "react-hot-toast";
+// eslint-disable-next-line react/prop-types
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import axios from "axios";
+
+import { useState, useEffect } from "react";
+import { useContext } from "react";
+import { JobsContext } from "./../../Context/JobsContext";
 export default function Profile() {
-  // const user = useSelector((state) => state.userRed.user);
-  // const dispatch = useDispatch();
-  // const [dataProfile, setDataProfile] = useState({});
-  const underDevelop = () => {
-    toast.success("this part under developing ");
+  const [openEdit, setOpenEdit] = useState(false);
+  const { nameDoctor } = useContext(JobsContext);
+  console.log("name doctor data from profile ", nameDoctor);
+  const togglePopEdit = () => {
+    setOpenEdit((prev) => !prev);
   };
-  // useEffect(() => {
-  //   dispatch(getDataUser());
-  // }, [dispatch]);
 
-  // useEffect(() => {
-  //   setDataProfile(user.user);
-  //   console.log("user data", user.user);
-  // }, [user]);
+  useEffect(() => {
+    console.log("flag toggle open pop up", openEdit);
+  }, [openEdit]);
 
+  const handleEditProfile = async (values) => {
+    try {
+      let { data } = await axios.patch(
+        "https://dentech.onrender.com/updateDentistEndUser/111111",
+        { ...values },
+        {
+          headers: {
+            token: localStorage.getItem("token"),
+          },
+        }
+      );
+      console.log("data after edit", data);
+      // notifySuccess(`Task Successed edit`);
+      togglePopEdit();
+      // getAllCreatedTasks();
+    } catch (error) {
+      console.log("error to update", error);
+    }
+  };
+
+  const validationSchema = Yup.object({
+    email: Yup.string()
+      .email("Invalid email format")
+      .required("Email is required"),
+    password: Yup.string().required("Password is required"),
+  });
+
+  let formikEditProfile = useFormik({
+    initialValues: {
+      email: nameDoctor && nameDoctor.email,
+      password: "", // Provide an appropriate initial value for the password
+    },
+    validationSchema,
+    onSubmit: (values, { resetForm }) => {
+      handleEditProfile(values);
+      resetForm();
+    },
+  });
   return (
-    <div>
-      <Toaster />
+    <div className="xxxxxxxxxxxxxxxxx">
+      {openEdit && (
+        <div className=" w-screen h-screen bg-black fixed bg-opacity-20 top-0 flex justify-center z-50">
+          {/* <div className=" h-full p-5  rounded-md "> */}
+          {/* --------------------------------------------------- */}
+          <div className="mt-14 flex flex-col justify-center content-center opacity-100 bg-slate-50  px-12 py-10  border-t-8 border-blue-500  rounded-md fixed top-10">
+            <h3 className=" capitalize text-gray-600 text-2xl font-mono text-center block">
+              new account
+            </h3>
+            <form onSubmit={formikEditProfile.handleSubmit}>
+              <div className="flex flex-col items-start  mt-4">
+                <label
+                  htmlFor="email"
+                  className="text-gray-500  lowercase mb-2 first-letter:capitalize"
+                >
+                  email :
+                </label>
+                <input
+                  className="bg-white  p-2 w-96 opacity-100 border-1 border-gray-300 rounded-md text-gray-500 text-sm capitalize"
+                  type="text"
+                  name="email"
+                  onChange={formikEditProfile.handleChange}
+                  value={formikEditProfile.values.email}
+                />
+                {formikEditProfile.errors.email &&
+                formikEditProfile.touched.email ? (
+                  <div className="alert alert-danger">
+                    {formikEditProfile.errors.email}
+                  </div>
+                ) : (
+                  ""
+                )}
+              </div>
+
+              <div className="flex flex-col items-start  mt-4">
+                <label
+                  htmlFor="password"
+                  className="text-gray-500  lowercase mb-2 first-letter:capitalize"
+                >
+                  password :
+                </label>
+                <input
+                  className="bg-white  p-2 w-96 opacity-100 border-1 border-gray-300 rounded-md text-gray-500 text-sm capitalize"
+                  type="text"
+                  name="password"
+                  onChange={formikEditProfile.handleChange}
+                  value={formikEditProfile.values.password}
+                />
+                {formikEditProfile.errors.password &&
+                formikEditProfile.touched.password ? (
+                  <div className="alert alert-danger">
+                    {formikEditProfile.errors.password}
+                  </div>
+                ) : (
+                  ""
+                )}
+              </div>
+
+              <div className="flex flex-row  justify-around content-center mt-3">
+                <button
+                  disabled={!formikEditProfile.dirty}
+                  type="submit"
+                  className="btn btn-primary w-44 text-2xl "
+                >
+                  save
+                </button>
+                <button
+                  onClick={() => togglePopEdit()}
+                  className="w-8 shadow-md   m-2 h-8 bg-red-400 transition duration-200 hover:bg-red-600 text-white  rounded-md  absolute top-0 right-0"
+                >
+                  <i className="fa fa-close"></i>
+                </button>
+              </div>
+            </form>
+          </div>
+
+          {/* -------------------------------------------- */}
+          {/* </div> */}
+        </div>
+      )}
       <div className="bg-white shadow-md mt-14 p-6 rounded-md text-center flex content-center justify-center  items-center flex-col">
         <div className="h-32 w-32 md:w-48 md:h-48 lg:w-64 lg:h-64 rounded-full capitalize bg-blue-400 flex items-center justify-center text-white border-1 border-slate-200 md:border text-3xl md:text-4xl lg:text-5xl shadow-sm mb-5">
           {"mahmoud".substring(0, 1)}
@@ -114,32 +229,9 @@ export default function Profile() {
         </form>
 
         <span className="w-96 p-0.5  bg-gray-100  rounded-full my-5 "></span>
-        {/* <div className="container"> */}
-
-        <div className="w-full sm:w-3/5 sm:text-lg text-xs">
-          <h4 className="text-gray-600 font-mono text-left mb-4 font-bold capitalize">
-            Notification Setting
-          </h4>
-          {settings.map((sett, index) => (
-            <div
-              key={index}
-              className="flex justify-between items-center h-10 mb-2 "
-            >
-              <span className="capitalize text-gray-500 font-mono font-semibold ">
-                {sett.text}
-              </span>{" "}
-              <span className="cursor-pointer" onClick={() => underDevelop()}>
-                {sett.isOn ? sett.iconeOn : sett.iconeOff}{" "}
-                {sett.isOn ? "On" : "Off"}
-              </span>
-            </div>
-          ))}
-        </div>
-
-        <span className="w-96 p-0.5  bg-gray-100  rounded-full my-5 "></span>
         <div className="button-edite ">
           <button
-            onClick={() => underDevelop()}
+            onClick={() => togglePopEdit()}
             className="w-44 bg-blue-600 text-white font-mono font-bold rounded-md p-2 cursor-pointer hover:bg-blue-800 transition duration-300 ease-in-out shadow-md"
           >
             Edite Profile
