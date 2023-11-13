@@ -73,7 +73,8 @@ const JobCard = ({ job }) => {
                 {new Date(job.deadLine).toDateString()}
               </p>
               <p className="mt-2 text-gray-500 capitalize font-mono font-semibold">
-                <i className="fa fa-tags  mr-2"></i>Price: ${job.price} EGP
+                <i className="fa fa-tags  mr-2"></i>Price:{" "}
+                <span className="font-light"> {job.price}EGP</span>
               </p>
               <p className="mt-2 text-gray-500">
                 <span className="text-gray-500 capitalize font-mono font-semibold">

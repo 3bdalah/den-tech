@@ -6,7 +6,8 @@ import axios from "axios";
 import { JobsContext } from "./../../Context/JobsContext";
 
 export default function Login() {
-  const { setToken, setJobs } = useContext(JobsContext);
+  const { setToken, setJobs, setNameDoctor, setPassword } =
+    useContext(JobsContext);
   let navigate = useNavigate();
   const [isLoading, setLoading] = useState(false);
   const handleLogin = async (values) => {
@@ -20,11 +21,15 @@ export default function Login() {
       );
       if (res.data.message == "logged in successfully") {
         console.log("data respone", res.data);
-        const { token, jobs } = res.data;
+        const { token, jobs, foundedDentist } = res.data;
+        setPassword(values.password);
+        setNameDoctor(foundedDentist);
         setToken(token);
         setJobs(jobs);
+        localStorage.setItem("password", values.password);
         localStorage.setItem("jobs", JSON.stringify(jobs));
         localStorage.setItem("token", token);
+        localStorage.setItem("doctorData", JSON.stringify(foundedDentist));
         navigate("/");
       } else if (
         res.data.message == "password not correct" ||
