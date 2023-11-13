@@ -68,7 +68,7 @@ export default function Header() {
               <div className=" capitalize no-underline w-12 h-12 mt-2 relative z-10">
                 <div>
                   {token && openDropMenu && (
-                    <div className="dropmenu absolute top-12 right-1 w-80  h-fit border-1 border-gray-200 shadow-md rounded-sm font-mono bg-slate-50">
+                    <div className="dropmenu absolute top-12 right-0 w-80  h-fit border-1 border-gray-200 shadow-md rounded-sm font-mono bg-slate-50">
                       <div className="group-head-menu flex items-center content-center  bg-slate-100 ">
                         <div className="m-2 h-10 w-10 rounded-md  bg-blue-400 flex items-center justify-center text-white border-1 border-white ">
                           {/* {dataProfile && dataProfile.userName
@@ -130,20 +130,8 @@ export default function Header() {
                   )}
                 </div>
 
-                {token ? (
-                  <div className="ccc flex flex-row items-center justify-center content-center ">
-                    <span className="text-sm float-left mr-3 text-gray-600 font-mono">
-                      Doctor
-                    </span>
-                    <div
-                      onClick={() => handleToggleMenu()}
-                      className="cursor-pointer h-10 w-10 p-4 rounded-md capitalize bg-blue-400 flex items-center justify-center text-white border-1 border-white"
-                    >
-                      {nameDoctor?.name?.substring(0, 1)}
-                    </div>
-                  </div>
-                ) : (
-                  <div className="ccc flex flex-row items-center justify-center content-center ">
+                {!token ? (
+                  <div className=" flex flex-row items-center justify-center content-center ">
                     <span className="text-sm float-left mr-3 text-gray-600 font-mono">
                       Doctor
                     </span>
@@ -152,6 +140,18 @@ export default function Header() {
                       className="cursor-pointer h-10 w-10 p-4 rounded-md capitalize bg-blue-400 flex items-center justify-center text-white border-1 border-white"
                     >
                       {"Doctor".substring(0, 1)}
+                    </div>
+                  </div>
+                ) : (
+                  <div className="flex flex-row items-center justify-center content-center ">
+                    <p className="text-sm float-left mr-3 text-gray-600 font-mono lowercase">
+                      {nameDoctor && nameDoctor.name.substring(0, 3)}
+                    </p>
+                    <div
+                      onClick={() => handleToggleMenu()}
+                      className="cursor-pointer h-10 w-10 p-4 rounded-md capitalize bg-blue-400 flex items-center justify-center text-white border-1 border-white"
+                    >
+                      {nameDoctor && nameDoctor.name.substring(0, 1)}
                     </div>
                   </div>
                 )}
