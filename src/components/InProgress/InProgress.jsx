@@ -13,7 +13,7 @@ export default function InProgress() {
           {inProgress.length >= 1 ? (
             inProgress.map((job) => <JobCard key={job._id} job={job} />)
           ) : (
-            <div className="mt-0 text-center text-2xl text-gray-600">
+            <div className="mt-0 text-center text-2xl text-gray-600 m-auto">
               <p className="mb-4">
                 <i className="fa fa-edit fa-2xl"></i>
               </p>
