@@ -20,11 +20,11 @@ export default function Header() {
     <>
       <nav className=" bg-slate-50 font-mono font-semibold   h-14 w-full  flex flex-row z-1 border-1 mb-0 border-gray-200 m-0 absolute top-0 left-0 z-10 ">
         <div className="custom-container flex justify-between content-center items-center ">
-          <div className="flex flex-row items-center justify-between  content-center ">
+          <div className="flex flex-row items-center  justify-between  content-center ">
             {!token ? (
               <>
                 {" "}
-                <span className="mx-4">
+                <span className="">
                   <Link
                     to="/jobs"
                     className="capitalize font-mono no-underline text-gray-700"
@@ -36,7 +36,7 @@ export default function Header() {
             ) : (
               <>
                 {" "}
-                <span className="mx-4">
+                <span className="mx-2">
                   <Link
                     to="/jobs"
                     className=" sm:text-base  text-xs  w-32 capitalize font-mono no-underline text-gray-700"
@@ -44,7 +44,7 @@ export default function Header() {
                     Jobs
                   </Link>
                 </span>
-                <span className="mx-4">
+                <span className="mx-2">
                   <Link
                     to="/in-progress"
                     className="sm:text-base text-xs capitalize font-mono no-underline text-gray-700"
@@ -52,10 +52,10 @@ export default function Header() {
                     Progress
                   </Link>
                 </span>
-                <span className="mx-4">
+                <span className="mx-2">
                   <Link
                     to="/finished"
-                    className=" sm:text-base text-xs capitalize font-mono no-underline text-gray-700"
+                    className=" sm:text-base text-xs capitalize mr-1 font-mono no-underline text-gray-700"
                   >
                     Finished
                   </Link>
