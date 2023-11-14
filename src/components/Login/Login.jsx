@@ -78,11 +78,8 @@ export default function Login() {
         <div className="box-img w-full opacity-30 absolute bottom-0 left-0 z-0">
           <img src="./doctor.svg" alt="doctor" />
         </div>
-        <div
-          className="container flex flex-col items-center justify-center  mt-6
-         content-center"
-        >
-          <div className=" border p-1 border-gray-200  rounded-md shadow-lg w-96 h-96 bg-gray-50 mt-24 z-10">
+        <div className=" flex flex-col items-center justify-center mt-6 content-center p-3">
+          <div className=" border p-1 border-gray-200 rounded-md shadow-lg w-full md:w-2/5  bg-gray-50 mt-24 z-10 pb-3">
             <div className="font-mono text-3xl text-slate-700 text-center my-6">
               Login
             </div>
@@ -96,7 +93,7 @@ export default function Login() {
                     Email:
                   </label>
                   <input
-                    className=" border border-gray-300 rounded-md bg-gray-100 p-2 "
+                    className="border border-gray-300 rounded-md bg-gray-100 p-2 w-full"
                     type="email"
                     name="email"
                     placeholder=" your email"
@@ -134,7 +131,7 @@ export default function Login() {
 
                 <button
                   type="submit"
-                  className="flex place-items-center hover:text-white bg-blue-400 hover:bg-blue-700 duration-300 transition  rounded-md  border-1 border-gray-400 shadow-md px-10  py-2 font-mono font-semibold capitalize mt-10 mx-auto"
+                  className="flex place-items-center hover:text-white bg-blue-400 hover:bg-blue-700 duration-300 transition rounded-md border-1 border-gray-400 shadow-md px-6 py-3 font-mono font-semibold capitalize mt-10 mx-auto"
                 >
                   login
                 </button>

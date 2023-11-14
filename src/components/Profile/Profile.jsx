@@ -71,10 +71,10 @@ export default function Profile() {
     },
   });
   return (
-    <div>
+    <>
       <Toaster />
       {openEdit && (
-        <div className=" w-screen h-screen bg-black fixed bg-opacity-20 top-0 flex justify-center z-50">
+        <div className=" w-screen  min-h-screen bg-black fixed bg-opacity-20 top-0 flex justify-center z-50">
           {/* <div className=" h-full p-5  rounded-md "> */}
           {/* --------------------------------------------------- */}
           <div className="mt-14 flex flex-col justify-center content-center opacity-100 bg-slate-50  px-12 py-10  border-t-8 border-blue-500  rounded-md fixed top-10">
@@ -158,8 +158,8 @@ export default function Profile() {
           {/* </div> */}
         </div>
       )}
-      <div className="bg-white shadow-md mt-14 p-6 rounded-md text-center flex content-center justify-center  items-center flex-col">
-        <div className="h-32 w-32 md:w-48 md:h-48 lg:w-64 lg:h-64 rounded-full capitalize bg-blue-400 flex items-center justify-center text-white border-1 border-slate-200 md:border text-3xl md:text-4xl lg:text-5xl shadow-sm mb-5">
+      <div className="bg-white  mt-14 p-6 rounded-md text-center flex content-center justify-center  items-center flex-col">
+        <div className="h-32 w-32 md:w-48 md:h-48 lg:w-64 lg:h-64 rounded-full capitalize bg-blue-400 flex items-center justify-center text-white border-1 border-slate-200 md:border text-3xl md:text-4xl lg:text-5xl mb-5">
           {nameDoctor && nameDoctor.name.substring(0, 1)}
         </div>
         <div className="mt-3 md:mt-5 text-gray-500 rounded-full font-bold font-mono relative text-xl md:text-2xl">
@@ -253,12 +253,12 @@ export default function Profile() {
         <div className="button-edite ">
           <button
             onClick={() => togglePopEdit()}
-            className="w-44 bg-blue-600 text-white font-mono font-bold rounded-md p-2 cursor-pointer hover:bg-blue-800 transition duration-300 ease-in-out shadow-md"
+            className="w-44 bg-blue-600 text-white font-mono font-bold rounded-md p-2 cursor-pointer hover:bg-blue-800 transition duration-300 ease-in-out shadow-md mt-10"
           >
             Edite Profile
           </button>
         </div>
       </div>
-    </div>
+    </>
   );
 }
