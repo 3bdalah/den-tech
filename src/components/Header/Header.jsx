@@ -118,10 +118,6 @@ export default function Header() {
                     <hr></hr>
                     <ul className="list mt-2">
                       <li className="text-gray-500 mb-2 ml-5">
-                        <i className="fa fa-share-from-square"></i> Invite
-                        Friend
-                      </li>
-                      <li className="text-gray-500 mb-2 ml-5">
                         <i className="fa fa-comments"></i> Send FeedBack
                       </li>
                     </ul>
