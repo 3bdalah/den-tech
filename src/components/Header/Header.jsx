@@ -19,8 +19,8 @@ export default function Header() {
   return (
     <>
       <nav className=" bg-slate-50 font-mono font-semibold   h-14 w-full  flex flex-row z-1 border-1 mb-0 border-gray-200 m-0 absolute top-0 left-0 z-10 ">
-        <div className="custom-container flex justify-between content-center items-center ">
-          <div className="flex flex-row items-center  justify-between  content-center ">
+        <div className="custom-container flex justify-between  content-center items-center ">
+          <div className="flex flex-row items-center justify-between   content-center ">
             {!token ? (
               <>
                 {" "}
