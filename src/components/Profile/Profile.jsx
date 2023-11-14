@@ -2,10 +2,8 @@
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
-
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import moment from "moment/moment";
-import { useContext } from "react";
 import { JobsContext } from "./../../Context/JobsContext";
 import toast, { Toaster } from "react-hot-toast";
 export default function Profile() {
@@ -43,10 +41,7 @@ export default function Profile() {
         console.log("done edite");
       }
       setLoading(false);
-      console.log("data after edit", data);
-      // notifySuccess(`Task Successed edit`);
       togglePopEdit();
-      // getAllCreatedTasks();
     } catch (error) {
       console.log("error to update", error);
     }
@@ -62,7 +57,7 @@ export default function Profile() {
   let formikEditProfile = useFormik({
     initialValues: {
       email: nameDoctor && nameDoctor.email,
-      password: "", // Provide an appropriate initial value for the password
+      password: "",
     },
     validationSchema,
     onSubmit: (values, { resetForm }) => {
@@ -75,11 +70,9 @@ export default function Profile() {
       <Toaster />
       {openEdit && (
         <div className=" w-screen  min-h-screen bg-black fixed bg-opacity-20 top-0 flex justify-center z-50">
-          {/* <div className=" h-full p-5  rounded-md "> */}
-          {/* --------------------------------------------------- */}
           <div className="mt-14 flex flex-col justify-center content-center opacity-100 bg-slate-50  px-12 py-10  border-t-8 border-blue-500  rounded-md fixed top-10">
             <h3 className=" capitalize text-gray-600 text-2xl font-mono text-center block">
-              new account
+              Edit account
             </h3>
             {loading === false ? (
               <form onSubmit={formikEditProfile.handleSubmit}>
@@ -110,9 +103,9 @@ export default function Profile() {
                 <div className="flex flex-col items-start  mt-4">
                   <label
                     htmlFor="password"
-                    className="text-gray-500  lowercase mb-2 first-letter:capitalize"
+                    className="text-gray-500  capitalize mb-2 first-letter:capitalize"
                   >
-                    password :
+                    Set Password :
                   </label>
                   <input
                     className="bg-white  p-2 w-96 opacity-100 border-1 border-gray-300 rounded-md text-gray-500 text-sm capitalize"
@@ -135,7 +128,11 @@ export default function Profile() {
                   <button
                     disabled={!formikEditProfile.dirty}
                     type="submit"
-                    className="btn btn-primary w-44 text-2xl "
+                    className={
+                      formikEditProfile.dirty
+                        ? "bg-blue-300 p-2  px-14 capitalize shadow-md font-mono rounded-md border border-gray-200"
+                        : " p-2  px-14 capitalize font-mono rounded-md border border-gray-200"
+                    }
                   >
                     save
                   </button>
